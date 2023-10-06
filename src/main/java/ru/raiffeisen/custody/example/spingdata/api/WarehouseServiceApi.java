@@ -10,4 +10,6 @@ public interface WarehouseServiceApi {
     Boolean isPresentByComponentAndCount(ComponentDto componentDto, BigDecimal qty);
 
     BigDecimal writeOff(List<CardRelationComponentDto> cardRelationComponentDtos);
+
+    void addProduction(Long id, BigDecimal qty);
 }

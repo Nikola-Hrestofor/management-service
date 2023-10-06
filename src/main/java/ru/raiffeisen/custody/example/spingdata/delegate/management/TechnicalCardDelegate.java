@@ -1,4 +1,4 @@
-package ru.raiffeisen.custody.example.spingdata.delegate;
+package ru.raiffeisen.custody.example.spingdata.delegate.management;
 
 import com.example.techcardservice.dto.CardDto;
 import com.fasterxml.jackson.databind.ObjectMapper;

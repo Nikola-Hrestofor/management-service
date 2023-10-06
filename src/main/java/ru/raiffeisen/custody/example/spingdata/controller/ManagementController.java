@@ -50,4 +50,9 @@ public class ManagementController {
     public void approveTask(@PathVariable String id){
         processService.approveTask(id);
     }
+
+    @PostMapping("/receive/{id}")
+    public void receive(@PathVariable String id){
+        processService.receive(id);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service
 import ru.raiffeisen.custody.example.spingdata.ManagementUtils
 import ru.raiffeisen.custody.example.spingdata.dto.ComponentDto
 import ru.raiffeisen.custody.example.spingdata.dto.ComponentProcess
+import java.math.BigDecimal
 import java.util.*
 import java.util.function.Consumer
 import java.util.logging.Logger
@@ -24,7 +25,7 @@ class ProcessService(
 
     fun getProcesses(): List<ComponentProcess> {
 
-        val listProcesses = runtimeService.createExecutionQuery().active().list().stream().map(Execution::getId)
+        val listProcesses = runtimeService.createExecutionQuery().active().list().stream().map(Execution::getProcessInstanceId).distinct()
         val processes = mutableListOf<ComponentProcess>()
         listProcesses.forEach(Consumer { o: Any? ->
             run {
@@ -32,7 +33,12 @@ class ProcessService(
                 val cardName = runtimeService.getVariables(o.toString())["cardName"].toString()
                 val cardCode = runtimeService.getVariables(o.toString())["cardCode"].toString()
                 val stepName = runtimeService.getVariables(o.toString())["stepName"].toString()
-                processes.add(ComponentProcess(UUID.fromString(o.toString()), cardName, cardCode, stepName))
+
+                val requiredStock = runtimeService.getVariable(o.toString(),"require").toString()
+//                var enrollStock = runtimeService.getVariables(o.toString())["require"].toString()
+
+
+                processes.add(ComponentProcess(UUID.fromString(o.toString()), cardName, cardCode, stepName, requiredStock))
             }
         })
 
@@ -48,7 +54,7 @@ class ProcessService(
         runtimeService.suspendProcessInstanceById(id)
     }
 
-    fun approveTask(processId: String){
+    fun approveTask(processId: String) {
         val id = taskService.createTaskQuery().active().list()
             .stream()
             .filter { task: Task -> task.processInstanceId == processId }
@@ -56,5 +62,16 @@ class ProcessService(
             .findFirst().orElse(null)
 
         taskService.complete(id)
+    }
+
+    fun receive(processId: String) {
+        val subscription = runtimeService.createEventSubscriptionQuery()
+            .processInstanceId(processId)
+            .eventType("message")
+            .eventName("production")
+            .singleResult()
+
+        runtimeService.messageEventReceived(subscription.eventName, subscription.executionId)
+
     }
 }

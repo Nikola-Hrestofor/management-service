@@ -1,6 +1,5 @@
-package ru.raiffeisen.custody.example.spingdata.delegate;
+package ru.raiffeisen.custody.example.spingdata.delegate.management;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -9,11 +8,10 @@ import ru.raiffeisen.custody.example.spingdata.aop.annotations.BusinessStep;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
-public class OrderDelegate implements JavaDelegate {
+public class FactoryProductDelegate implements JavaDelegate {
     @Override
     @BusinessStep
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        log.info("SMT WRONG. TBD");
+        log.info("Factory task was receive ");
     }
 }

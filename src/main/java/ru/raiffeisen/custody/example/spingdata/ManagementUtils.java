@@ -67,4 +67,5 @@ public class ManagementUtils {
         CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(col, el);
         return objectMapper.readValue(json, listType);
     }
+
 }
