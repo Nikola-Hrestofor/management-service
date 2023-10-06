@@ -8,6 +8,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 import ru.raiffeisen.custody.example.spingdata.ManagementUtils;
+import ru.raiffeisen.custody.example.spingdata.aop.annotations.BusinessStep;
 import ru.raiffeisen.custody.example.spingdata.api.WarehouseServiceApi;
 import ru.raiffeisen.custody.example.spingdata.dto.ComponentDto;
 
@@ -24,6 +25,7 @@ public class WarehouseDelegate implements JavaDelegate {
     private final ManagementUtils utils;
 
     @Override
+    @BusinessStep
     public void execute(DelegateExecution delegateExecution) throws Exception {
         CardDto card = utils.getObject("card", CardDto.class, delegateExecution);
         BigDecimal qty = utils.getVariable("qty", BigDecimal.class, delegateExecution);
