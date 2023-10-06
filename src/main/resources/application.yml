@@ -1,0 +1,34 @@
+spring:
+  services:
+    tech-card:
+      host: "http://localhost:8081"
+  flyway:
+    locations: classpath:/db/migration
+    schemas: management
+  jpa:
+    generate-ddl: off
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: on
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/erp
+    password: postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+
+datasource:
+  camunda:
+    password: postgres
+    username: postgres
+    jdbc-url: jdbc:postgresql://localhost:5432/camunda
+    driver-class-name: org.postgresql.Driver
+camunda:
+  bpm:
+    filter.create: All
+    admin-user:
+      id: admin
+      password: admin
+server:
+  port: 8086

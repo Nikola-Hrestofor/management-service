@@ -1,0 +1,10 @@
+.idea/
+target/
+FFDC/
+test-output/
+old/
+log/
+.DS_Store
+*.iml
+*.log
+dependency-reduced-pom.xml

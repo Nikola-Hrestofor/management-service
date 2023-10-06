@@ -1,0 +1,68 @@
+<strong>Start Disclosure Process</strong>
+
+<form role="form" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">Isin</label>
+        <div class="controls">
+            <input type="text" class="form-control"
+                   cam-variable-name="isin"
+                   cam-variable-type="String"
+                   required
+            />
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Date</label>
+        <div class="controls">
+            <p class="input-group">
+                <input type="text"
+                       cam-variable-name="disclosuredate"
+                       cam-variable-type="Date"
+                       class="form-control"
+                       uib-datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
+                       is-open="dateFieldOpened"/>
+
+                <span class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-default"
+                            ng-click="open($event)">
+                      <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <script cam-script type="text/form-script">
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.dateFieldOpened = true;
+        };
+    </script>
+</form>
+
+
+<!--<form role="form" class="form-horizontal">-->
+<!--    <div class="control-group">-->
+<!--        <label class="control-label">Isin</label>-->
+<!--        <div class="controls">-->
+<!--            <input type="text" class="form-control"-->
+<!--                   cam-variable-name="isin"-->
+<!--                   cam-variable-type="String"-->
+<!--                   required-->
+<!--            />-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="control-group">-->
+<!--        <label class="control-label">Disclosure date</label>-->
+<!--        <div class="controls">-->
+<!--            <input class="form-control"-->
+<!--                   cam-variable-type="Date"-->
+<!--                   cam-variable-name="disclosure-date"-->
+<!--                   name="disclosure-date" />-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</form>-->
