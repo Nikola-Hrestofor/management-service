@@ -1,6 +1,6 @@
 package ru.raiffeisen.custody.example.spingdata.api.stubImpl;
 
-import com.example.techcardservice.dto.CardRelationComponentDto;
+import ru.raiffeisen.custody.example.spingdata.dto.CardRelationComponentDto;
 import lombok.extern.slf4j.Slf4j;
 import ru.raiffeisen.custody.example.spingdata.dto.ComponentDto;
 import org.springframework.stereotype.Service;

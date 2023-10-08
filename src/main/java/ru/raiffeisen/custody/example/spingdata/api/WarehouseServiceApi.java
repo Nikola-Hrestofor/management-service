@@ -1,6 +1,6 @@
 package ru.raiffeisen.custody.example.spingdata.api;
 
-import com.example.techcardservice.dto.CardRelationComponentDto;
+import ru.raiffeisen.custody.example.spingdata.dto.CardRelationComponentDto;
 import ru.raiffeisen.custody.example.spingdata.dto.ComponentDto;
 
 import java.math.BigDecimal;

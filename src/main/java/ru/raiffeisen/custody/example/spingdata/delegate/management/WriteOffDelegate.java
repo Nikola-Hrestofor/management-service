@@ -1,7 +1,7 @@
 package ru.raiffeisen.custody.example.spingdata.delegate.management;
 
-import com.example.techcardservice.dto.CardDto;
-import com.example.techcardservice.dto.CardRelationComponentDto;
+import ru.raiffeisen.custody.example.spingdata.dto.CardDto;
+import ru.raiffeisen.custody.example.spingdata.dto.CardRelationComponentDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;

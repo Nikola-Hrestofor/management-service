@@ -1,6 +1,5 @@
 package ru.raiffeisen.custody.example.spingdata.dto
 
-import com.example.techcardservice.dto.CategoryDto
 import lombok.Setter
 import java.math.BigDecimal
 

@@ -1,7 +1,5 @@
 package ru.raiffeisen.custody.example.spingdata.delegate.management;
 
-import com.example.techcardservice.dto.CardDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -9,8 +7,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.stereotype.Component;
 import ru.raiffeisen.custody.example.spingdata.ManagementUtils;
 import ru.raiffeisen.custody.example.spingdata.api.TechCardServiceApi;
-
-import java.util.Optional;
+import ru.raiffeisen.custody.example.spingdata.dto.CardDto;
 
 /**
  * ExampleDelegate

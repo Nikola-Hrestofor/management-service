@@ -1,4 +1,4 @@
-package com.example.techcardservice.dto
+package ru.raiffeisen.custody.example.spingdata.dto
 
 import ru.raiffeisen.custody.example.spingdata.dto.ComponentDto
 //import ru.raiffeisen.custody.example.spingdata.dto.ComponentDto

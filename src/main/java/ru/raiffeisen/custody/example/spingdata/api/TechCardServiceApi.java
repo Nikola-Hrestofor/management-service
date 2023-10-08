@@ -1,6 +1,6 @@
 package ru.raiffeisen.custody.example.spingdata.api;
 
-import com.example.techcardservice.dto.CardDto;
+import ru.raiffeisen.custody.example.spingdata.dto.CardDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
