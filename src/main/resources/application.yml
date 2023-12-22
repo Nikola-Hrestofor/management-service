@@ -34,9 +34,9 @@ server:
   port: 8086
 
 factory:
-    jms:
-      url: "tcp://localhost:61616"
-      user: "admin"
-      password: "admin"
-      queue-out: "MANAGEMENT.FACTORY"
-      queue-in: "FACTORY.MANAGEMENT"
+  jms:
+    url: "tcp://158.160.136.142:61616"
+    user: "artemis"
+    password: "artemis"
+    queue-out: "MANAGEMENT.FACTORY"
+    queue-in: "FACTORY.MANAGEMENT"

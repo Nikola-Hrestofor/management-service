@@ -1,13 +1,13 @@
 <strong>Start Disclosure Process</strong>
 
-<form role="form" class="form-horizontal">
+<form class="form-horizontal" role="form">
     <div class="control-group">
         <label class="control-label">Isin</label>
         <div class="controls">
-            <input type="text" class="form-control"
-                   cam-variable-name="isin"
-                   cam-variable-type="String"
+            <input cam-variable-name="isin" cam-variable-type="String"
+                   class="form-control"
                    required
+                   type="text"
             />
         </div>
     </div>
@@ -16,17 +16,17 @@
         <label class="control-label">Date</label>
         <div class="controls">
             <p class="input-group">
-                <input type="text"
-                       cam-variable-name="disclosuredate"
+                <input cam-variable-name="disclosuredate"
                        cam-variable-type="Date"
                        class="form-control"
-                       uib-datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"
-                       is-open="dateFieldOpened"/>
+                       is-open="dateFieldOpened"
+                       type="text"
+                       uib-datepicker-popup="yyyy-MM-dd'T'HH:mm:ss"/>
 
                 <span class="input-group-btn">
-                    <button type="button"
-                            class="btn btn-default"
-                            ng-click="open($event)">
+                    <button class="btn btn-default"
+                            ng-click="open($event)"
+                            type="button">
                       <i class="glyphicon glyphicon-calendar"></i>
                     </button>
                 </span>
