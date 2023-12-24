@@ -17,6 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("data")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ManagementController {
 
     private final RuntimeService runtimeService;
