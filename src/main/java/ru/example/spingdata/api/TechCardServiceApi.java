@@ -8,5 +8,5 @@ import ru.example.spingdata.dto.CardDto;
 @FeignClient(name = "tech-card", path = "/api/v1/cards", url = "${spring.services.tech-card.host}")
 public interface TechCardServiceApi {
     @GetMapping(value = "/{id}")
-    CardDto getCard(@PathVariable Long id);
+    CardDto getCard(@PathVariable("id") Long id);
 }
