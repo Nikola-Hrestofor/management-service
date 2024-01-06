@@ -1,5 +1,6 @@
 package ru.example.spingdata.delegate.management;
 
+import com.example.warehouseservice.dto.enums.UnitType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import ru.example.spingdata.ManagementUtils;
 import ru.example.spingdata.aop.annotations.BusinessStep;
 import ru.example.spingdata.api.WarehouseServiceApi;
+import ru.example.spingdata.api.dto.WarehouseRequest;
 
 import java.math.BigDecimal;
 
@@ -40,7 +42,15 @@ public class ProductWarehouseDelegate implements JavaDelegate {
 
         utils.setObject("require", require, delegateExecution);
 
-        warehouseServiceApi.addProduction(id, enrollStock);
+//        warehouseServiceApi.addProduction(id, enrollStock);
+
+        warehouseServiceApi.addNewUnit(WarehouseRequest.builder()
+                        .amount(enrollStock)
+                        .childId(id)
+                        .cost(BigDecimal.ZERO)
+                        .type(UnitType.CARD)
+                        .orderNumber("")
+                .build());
 
         if (require.compareTo(BigDecimal.ZERO) > 0)
             delegateExecution.setVariable("isFactoryFinish", false);

@@ -1,7 +1,10 @@
 spring:
+
   services:
     tech-card:
       host: "http://localhost:8081"
+    warehouse:
+      host: localhost:8087
   flyway:
     locations: classpath:/db/migration
     schemas: management

@@ -1,5 +1,6 @@
 package ru.example.spingdata.delegate.management;
 
+import com.example.warehouseservice.dto.enums.UnitType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import ru.example.spingdata.ManagementUtils;
 import ru.example.spingdata.aop.annotations.BusinessStep;
 import ru.example.spingdata.api.WarehouseServiceApi;
+import ru.example.spingdata.api.dto.WarehouseRequest;
 import ru.example.spingdata.dto.CardDto;
 import ru.example.spingdata.dto.CardRelationComponentDto;
 
@@ -41,9 +43,22 @@ public class WriteOffDelegate implements JavaDelegate {
 
         log.info("write off components {}", components);
 
-        BigDecimal cost = warehouseService.writeOff(components);
+        BigDecimal costs = BigDecimal.ZERO;
+//                warehouseService.writeOff(components);
 
-        delegateExecution.setVariable("componentsCost", cost);
-        log.info("cost {}", cost);
+        components.forEach(cardRelationComponentDto -> {
+            BigDecimal cost = warehouseService.seizeUnit(WarehouseRequest.builder()
+                    .amount(cardRelationComponentDto.getQty())
+                    .cost(BigDecimal.ZERO)
+                    .childId(cardRelationComponentDto.getId())
+                    .orderNumber("")
+                    .type(UnitType.COMPONENT)
+                    .build());
+            costs.add(cost);
+            //TODO costs = costs.add(cost);
+        });
+
+        delegateExecution.setVariable("componentsCost", costs);
+        log.info("cost {}", costs);
     }
 }

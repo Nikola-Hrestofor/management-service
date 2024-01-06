@@ -11,18 +11,15 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class WarehouseServiceImpl implements WarehouseServiceApi {
-    @Override
+public class WarehouseServiceImpl {
     public Boolean isPresentByComponentAndCount(ComponentDto componentDto, BigDecimal qty) {
         return false;
     }
 
-    @Override
     public BigDecimal writeOff(List<CardRelationComponentDto> cardRelationComponentDtos) {
         return BigDecimal.valueOf(3456);
     }
 
-    @Override
     public void addProduction(Long id, BigDecimal qty) {
         log.info("Учтено на складе {} штук продукции {}", qty, id);
     }
