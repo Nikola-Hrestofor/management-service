@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1g2tj8e" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.14.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1g2tj8e" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.18.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
   <bpmn:collaboration id="Collaboration_0e2xt7t">
     <bpmn:participant id="Participant_0pirgnq" name="Manager" processRef="management" />
   </bpmn:collaboration>
@@ -9,7 +9,7 @@
       <bpmn:incoming>Flow_0s88hof</bpmn:incoming>
       <bpmn:outgoing>Flow_0obzbju</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1gizkg6" name="Проверить наличие состовляющих на складе" camunda:delegateExpression="${warehouseDelegate}">
+    <bpmn:serviceTask id="Activity_1gizkg6" name="Проверить наличие составляющих на складе" camunda:delegateExpression="${warehouseDelegate}">
       <bpmn:incoming>Flow_0obzbju</bpmn:incoming>
       <bpmn:outgoing>Flow_1xu1oaz</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -134,14 +134,14 @@
       <bpmndi:BPMNShape id="Event_0ze15lx_di" bpmnElement="Event_0ze15lx">
         <dc:Bounds x="1772" y="189" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0dryva6_di" bpmnElement="Activity_1qvo2f7">
-        <dc:Bounds x="1050" y="167" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_10ebau0_di" bpmnElement="Activity_08ui9bd">
         <dc:Bounds x="1300" y="167" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0l2tx46_di" bpmnElement="Activity_1eh2oj8">
         <dc:Bounds x="1460" y="167" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dryva6_di" bpmnElement="Activity_1qvo2f7">
+        <dc:Bounds x="1050" y="167" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0s88hof_di" bpmnElement="Flow_0s88hof">
         <di:waypoint x="375" y="207" />
