@@ -6,6 +6,7 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.web.bind.annotation.*;
 import ru.example.spingdata.dto.ComponentDto;
 import ru.example.spingdata.dto.ComponentProcess;
+import ru.example.spingdata.dto.FactoryDto;
 import ru.example.spingdata.service.ProcessService;
 
 import java.math.BigDecimal;
@@ -53,8 +54,13 @@ public class ManagementController {
         processService.approveTask(id);
     }
 
-    @PostMapping("/receive/{id}")
-    public void receive(@PathVariable String id) {
-        processService.receive(id);
+    @PostMapping("/receive/order/{id}")
+    public void receiveOrder(@PathVariable String id) {
+        processService.receiveOrder(id);
+    }
+
+    @PostMapping("/receive/factory/{id}")
+    public void receiveFactory(@PathVariable String id, @RequestParam BigDecimal stock) {
+        processService.receiveFactory(id, stock);
     }
 }

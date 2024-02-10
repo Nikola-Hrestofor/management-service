@@ -10,5 +10,5 @@ data class ComponentDto(
         val unit: String,
         val category: CategoryDto,
         val code: String,
-        var stock: BigDecimal = BigDecimal(75)
+        var stock: BigDecimal,
 )

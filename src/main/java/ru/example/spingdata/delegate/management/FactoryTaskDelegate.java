@@ -20,10 +20,10 @@ import java.math.BigDecimal;
 public class FactoryTaskDelegate implements JavaDelegate {
 
     private final ManagementUtils utils;
-    @Autowired
-    public JmsTemplate jmsTemplate;
-    @Value("${factory.jms.queue-out}")
-    String queue;
+//    @Autowired
+//    public JmsTemplate jmsTemplate;
+//    @Value("${factory.jms.queue-out}")
+//    String queue;
 
     @Override
     @BusinessStep
@@ -37,10 +37,10 @@ public class FactoryTaskDelegate implements JavaDelegate {
 //        delegateExecution.setVariable("rest", qty);
         utils.setObject("require", qty, delegateExecution);
         FactoryDto factoryDto = new FactoryDto(cardId, qty);
-        jmsTemplate.convertAndSend(queue, factoryDto, message -> {
-            message.setStringProperty("processId", processId);
-            return message;
-        });
+//        jmsTemplate.convertAndSend(queue, factoryDto, message -> {
+//            message.setStringProperty("processId", processId);
+//            return message;
+//        });
         log.info("Factory task was send with process id {}", processId
         );
     }

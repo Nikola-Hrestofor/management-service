@@ -48,9 +48,9 @@ public class WriteOffDelegate implements JavaDelegate {
 
         components.forEach(cardRelationComponentDto -> {
             BigDecimal cost = warehouseService.seizeUnit(WarehouseRequest.builder()
-                    .amount(cardRelationComponentDto.getQty())
+                    .amount(cardRelationComponentDto.getQty().multiply(qty))
                     .cost(BigDecimal.ZERO)
-                    .childId(cardRelationComponentDto.getId())
+                    .childId(cardRelationComponentDto.getComponent().getId())
                     .orderNumber("")
                     .type(UnitType.COMPONENT)
                     .build());

@@ -9,11 +9,6 @@ import ru.example.spingdata.ManagementUtils;
 import ru.example.spingdata.api.TechCardServiceApi;
 import ru.example.spingdata.dto.CardDto;
 
-/**
- * ExampleDelegate
- *
- * @author Rail Iulgutlin Raiffeisen Bank Russia 13.10.2021
- */
 @Slf4j
 @Component
 @RequiredArgsConstructor

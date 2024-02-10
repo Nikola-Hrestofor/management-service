@@ -8,15 +8,16 @@ import org.springframework.stereotype.Service
 import ru.example.spingdata.ManagementUtils
 import ru.example.spingdata.dto.ComponentDto
 import ru.example.spingdata.dto.ComponentProcess
+import java.math.BigDecimal
 import java.util.*
 import java.util.function.Consumer
 import java.util.logging.Logger
 
 @Service
 class ProcessService(
-        private val runtimeService: RuntimeService,
-        private val managementUtils: ManagementUtils,
-        val taskService: TaskService
+    private val runtimeService: RuntimeService,
+    private val managementUtils: ManagementUtils,
+    val taskService: TaskService
 ) {
     companion object {
         val logger = Logger.getLogger(ProcessService::class.java.name)
@@ -24,7 +25,9 @@ class ProcessService(
 
     fun getProcesses(): List<ComponentProcess> {
 
-        val listProcesses = runtimeService.createExecutionQuery().active().list().stream().map(Execution::getProcessInstanceId).distinct()
+        val listProcesses =
+            runtimeService.createExecutionQuery().active().list().stream().map(Execution::getProcessInstanceId)
+                .distinct()
         val processes = mutableListOf<ComponentProcess>()
         listProcesses.forEach(Consumer { o: Any? ->
             run {
@@ -37,7 +40,15 @@ class ProcessService(
 //                var enrollStock = runtimeService.getVariables(o.toString())["require"].toString()
 
 
-                processes.add(ComponentProcess(UUID.fromString(o.toString()), cardName, cardCode, stepName, requiredStock))
+                processes.add(
+                    ComponentProcess(
+                        UUID.fromString(o.toString()),
+                        cardName,
+                        cardCode,
+                        stepName,
+                        requiredStock
+                    )
+                )
             }
         })
 
@@ -55,21 +66,35 @@ class ProcessService(
 
     fun approveTask(processId: String) {
         val id = taskService.createTaskQuery().active().list()
-                .stream()
-                .filter { task: Task -> task.processInstanceId == processId }
-                .map { obj: Task -> obj.id }
-                .findFirst().orElse(null)
+            .stream()
+            .filter { task: Task -> task.processInstanceId == processId }
+            .map { obj: Task -> obj.id }
+            .findFirst().orElse(null)
 
         taskService.complete(id)
     }
 
-    fun receive(processId: String) {
+    fun receiveOrder(processId: String) {
         val subscription = runtimeService.createEventSubscriptionQuery()
-                .processInstanceId(processId)
-                .eventType("message")
-                .eventName("production")
-                .singleResult()
+            .processInstanceId(processId)
+            .eventType("message")
+            .eventName("order")
+            .singleResult()
 
+        runtimeService.messageEventReceived(subscription.eventName, subscription.executionId)
+
+    }
+
+    fun receiveFactory(processId: String, stock: BigDecimal) {
+        val subscription = runtimeService.createEventSubscriptionQuery()
+            .processInstanceId(processId)
+            .eventType("message")
+            .eventName("production")
+            .singleResult()
+
+        logger.info("subscription  $subscription")
+
+        runtimeService.setVariable(processId, "enrollStock", stock)
         runtimeService.messageEventReceived(subscription.eventName, subscription.executionId)
 
     }
