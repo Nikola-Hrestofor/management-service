@@ -32,11 +32,11 @@ class ProcessService(
         listProcesses.forEach(Consumer { o: Any? ->
             run {
                 logger.info("processId $o")
-                val cardName = runtimeService.getVariables(o.toString())["cardName"].toString()
-                val cardCode = runtimeService.getVariables(o.toString())["cardCode"].toString()
-                val stepName = runtimeService.getVariables(o.toString())["stepName"].toString()
+                val cardName = runtimeService.getVariables(o.toString())["cardName"]?.toString()
+                val cardCode = runtimeService.getVariables(o.toString())["cardCode"]?.toString()
+                val stepName = runtimeService.getVariables(o.toString())["stepName"]?.toString()
 
-                val requiredStock = runtimeService.getVariable(o.toString(), "require").toString()
+                val requiredStock = runtimeService.getVariable(o.toString(), "require")?.toString()
 //                var enrollStock = runtimeService.getVariables(o.toString())["require"].toString()
 
 

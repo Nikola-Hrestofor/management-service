@@ -1,6 +1,6 @@
 package ru.example.spingdata.api.dto;
 
-import com.example.warehouseservice.dto.enums.UnitType;
+import ru.example.spingdata.api.dto.enums.UnitType;
 import lombok.Builder;
 import lombok.Data;
 

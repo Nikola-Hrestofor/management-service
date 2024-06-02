@@ -1,4 +1,4 @@
-package ru.example.spingdata.delegate.management;
+package ru.example.spingdata.delegate.presale;
 
 import ru.example.spingdata.api.dto.enums.UnitType;
 import lombok.RequiredArgsConstructor;
@@ -10,49 +10,41 @@ import ru.example.spingdata.ManagementUtils;
 import ru.example.spingdata.aop.annotations.BusinessStep;
 import ru.example.spingdata.api.WarehouseServiceApi;
 import ru.example.spingdata.api.dto.WarehouseRequest;
-import ru.example.spingdata.dto.CardDto;
-import ru.example.spingdata.dto.CardRelationComponentDto;
+import ru.example.spingdata.entity.PresaleEntity;
+import ru.example.spingdata.repository.PresaleRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class WriteOffDelegate implements JavaDelegate {
+public class WriteOffPresaleDelegate implements JavaDelegate {
     private final WarehouseServiceApi warehouseService;
     private final ManagementUtils utils;
+    private final PresaleRepository presaleRepository;
 
     @Override
     @BusinessStep
     public void execute(DelegateExecution delegateExecution) throws Exception {
+        UUID uuid = utils.getVariable("uuid", UUID.class, delegateExecution);
 
-        CardDto card = utils.getObject("card", CardDto.class, delegateExecution);
+        List<PresaleEntity> entities = presaleRepository.getAllByUuid(uuid);
+        Long count = utils.getVariable("count", Long.class, delegateExecution);
 
-        BigDecimal qty = utils.getVariable("qty", BigDecimal.class, delegateExecution);
 
-        List<CardRelationComponentDto> components = card.getComponents();
-
-        components.forEach(
-                cardRelationComponentDto -> {
-                    BigDecimal requiredStock = cardRelationComponentDto.getQty().multiply(qty)
-                            .subtract(cardRelationComponentDto.getComponent().getStock());
-                    cardRelationComponentDto.getComponent().setStock(requiredStock);
-                }
-        );
-
-        log.info("write off components {}", components);
+        log.info("write off presale note {}", entities);
 
         BigDecimal costs = BigDecimal.ZERO;
-//                warehouseService.writeOff(components);
 
-        components.forEach(cardRelationComponentDto -> {
+        entities.forEach(presale -> {
             BigDecimal cost = warehouseService.seizeUnit(WarehouseRequest.builder()
-                    .amount(cardRelationComponentDto.getQty().multiply(qty))
+                    .amount(presale.getQty().multiply(BigDecimal.valueOf(count)))
                     .cost(BigDecimal.ZERO)
-                    .childId(cardRelationComponentDto.getComponent().getId())
+                    .childId(presale.getItemId())
                     .orderNumber("")
-                    .type(UnitType.COMPONENT)
+                    .type(UnitType.valueOf(presale.getType()))
                     .build());
             costs.add(cost);
             //TODO costs = costs.add(cost);

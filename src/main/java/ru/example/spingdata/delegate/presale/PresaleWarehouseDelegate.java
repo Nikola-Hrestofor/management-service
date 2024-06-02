@@ -1,4 +1,4 @@
-package ru.example.spingdata.delegate.management;
+package ru.example.spingdata.delegate.presale;
 
 import ru.example.spingdata.api.dto.enums.UnitType;
 import lombok.RequiredArgsConstructor;
@@ -16,39 +16,33 @@ import java.math.BigDecimal;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class ProductWarehouseDelegate implements JavaDelegate {
+public class PresaleWarehouseDelegate implements JavaDelegate {
     private final ManagementUtils utils;
     private final WarehouseServiceApi warehouseServiceApi;
 
     @Override
     @BusinessStep
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        log.info("ProductWarehouseDelegate");
+        log.info("PresaleWarehouseDelegate");
 
         BigDecimal enrollStock = utils.getVariable("enrollStock", BigDecimal.class, delegateExecution);
         BigDecimal require = utils.getObject("require", BigDecimal.class, delegateExecution);
         Long id = utils.getVariable("cardId", Long.class, delegateExecution);
 
-//        BigDecimal enrollStock = (BigDecimal) delegateExecution.getVariable("enrollStock");
-//        BigDecimal require = (BigDecimal) delegateExecution.getVariable("require");
 
         log.info("enrollStock {}", enrollStock);
         log.info("require {}", require);
-
-//        log.info("enrollStock1 {}", enrollStock1);
-//        log.info("require1 {}", require1);
 
         require = require.subtract(enrollStock);
 
         utils.setObject("require", require, delegateExecution);
 
-//        warehouseServiceApi.addProduction(id, enrollStock);
 
         warehouseServiceApi.addNewUnit(WarehouseRequest.builder()
                         .amount(enrollStock)
                         .childId(id)
                         .cost(BigDecimal.ZERO)
-                        .type(UnitType.CARD)
+                        .type(UnitType.PRODUCT)
                         .orderNumber("")
                 .build());
 
