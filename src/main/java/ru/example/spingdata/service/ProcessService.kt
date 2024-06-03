@@ -32,7 +32,8 @@ class ProcessService(
         listProcesses.forEach(Consumer { o: Any? ->
             run {
                 logger.info("processId $o")
-                val cardName = runtimeService.getVariables(o.toString())["cardName"]?.toString()
+                val cardName = Optional.ofNullable(runtimeService.getVariables(o.toString())["cardName"])
+                    .orElse(runtimeService.getVariables(o.toString())["name"])?.toString()
                 val cardCode = runtimeService.getVariables(o.toString())["cardCode"]?.toString()
                 val stepName = runtimeService.getVariables(o.toString())["stepName"]?.toString()
 
