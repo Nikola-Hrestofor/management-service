@@ -29,18 +29,20 @@ public class ManagementController {
     private final PresaleService presaleService;
 
     @PostMapping
-    public void start(@RequestParam Long cardId, BigDecimal qty) {
+    public String start(@RequestParam Long cardId, BigDecimal qty) {
         log.info("Start process cardId {}; qty {}", cardId, qty);
         runtimeService.startProcessInstanceByKey("management", Map.of(
                 "cardId", cardId,
                 "qty", qty
         ));
+        return "";
     }
 
     @PostMapping("/start/presale")
-    public void startPresale(@RequestBody PresaleRequest items) {
+    public String startPresale(@RequestBody PresaleRequest items) {
         log.info("Start process presale {}", items);
         presaleService.startPresale(items);
+        return "";
     }
 
     @GetMapping("/processes")
