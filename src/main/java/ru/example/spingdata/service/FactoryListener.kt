@@ -17,8 +17,8 @@ class FactoryListener(private val runtimeService: RuntimeService,
         val logger = Logger.getLogger(ProcessService::class.java.name)
     }
 
-    @JmsListener(containerFactory = "artemisJmsListenerFactory",
-            destination = "\${factory.jms.queue-in}")
+//    @JmsListener(containerFactory = "artemisJmsListenerFactory",
+//            destination = "\${factory.jms.queue-in}")
     fun onMessage(@Headers messageHeaders: MessageHeaders,
                   message: TextMessage
     ) {
