@@ -10,5 +10,5 @@ data class PaymentDto(
     val orderNumber: String?,
     val amount: BigDecimal,
     val direction: Direction,
-    val deliveryTime: LocalDateTime = LocalDateTime.now()
+    val deliveryTime: LocalDateTime? = LocalDateTime.now()
 )
