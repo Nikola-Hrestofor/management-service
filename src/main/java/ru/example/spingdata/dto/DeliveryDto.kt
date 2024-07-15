@@ -15,5 +15,5 @@ data class DeliveryDto(
     val price: BigDecimal,
     val direction: Direction,
     val deliveryTime: LocalDateTime? = LocalDateTime.now(),
-    val productName: String
+    val productName: String?
 )
