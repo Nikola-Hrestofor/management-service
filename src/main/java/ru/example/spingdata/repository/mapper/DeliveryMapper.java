@@ -10,7 +10,7 @@ import java.util.List;
 public interface DeliveryMapper {
     DeliveryEntity toEntity(DeliveryDto model);
 
-    DeliveryDto toModel(DeliveryEntity entity);
+    DeliveryDto toModel(DeliveryEntity entity, String productName);
 
     List<DeliveryDto> toModels(List<DeliveryEntity> entities);
 }
